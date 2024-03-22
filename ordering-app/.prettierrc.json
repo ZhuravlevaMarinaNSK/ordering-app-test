@@ -1,0 +1,25 @@
+{
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "parser": "babel-ts"
+      }
+    }
+  ],
+  "plugins": ["prettier-plugin-organize-attributes"],
+  "attributeGroups": [
+    "$ANGULAR_STRUCTURAL_DIRECTIVE",
+    "$ANGULAR_ELEMENT_REF",
+    "^mat",
+    "^cdk",
+    "^app",
+    "$ANGULAR_INPUT",
+    "$ANGULAR_TWO_WAY_BINDING",
+    "$ANGULAR_OUTPUT",
+    "$CODE_GUIDE"
+  ]
+}

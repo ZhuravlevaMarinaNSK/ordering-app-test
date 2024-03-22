@@ -1,0 +1,5 @@
+# Ignore everything recursively
+.angular
+coverage
+node_modules
+
