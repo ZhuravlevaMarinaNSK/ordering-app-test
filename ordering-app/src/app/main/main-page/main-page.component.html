@@ -1,0 +1,8 @@
+<mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav opened [fixedInViewport]=true>
+    <a [routerLink]="[MainPath.OrderListPath]">Order List</a>
+  </mat-sidenav>
+  <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
+</mat-sidenav-container>

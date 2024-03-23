@@ -1,0 +1,34 @@
+Order List
+<mat-table [dataSource]="orders$" style="display: table">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="customerId">
+    <th mat-header-cell *matHeaderCellDef> Customer</th>
+    <td mat-cell *matCellDef="let element"> {{element.customer.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="items">
+    <th mat-header-cell *matHeaderCellDef> Items </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngFor="let item of element.items;">
+        <mat-card [style]="{margin: '10px', 'background-color': 'gray', padding: '10px'}">
+          <div>Product ID: {{ item['product-id']}}.</div>
+          <div>Quantity: {{ item.quantity}}.</div>
+          <div>Unit price: {{ item['unit-price']}}.</div>
+          <div>Total price: {{ item.total}}.</div>
+        </mat-card>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
