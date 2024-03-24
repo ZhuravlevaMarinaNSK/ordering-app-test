@@ -1,7 +1,8 @@
-import {ComponentHarness, parallel} from '@angular/cdk/testing';
+import {ComponentHarness, ContentContainerComponentHarness, parallel} from '@angular/cdk/testing';
 import {MatCellHarness, MatRowHarness, MatTableHarness} from '@angular/material/table/testing';
+import {MatButtonHarness} from '@angular/material/button/testing';
 
-export class OrderListPageHarness extends ComponentHarness {
+export class OrderListPageHarness extends ContentContainerComponentHarness {
   static hostSelector = 'app-order-list';
 
   getTableHarness(): Promise<MatTableHarness> {
@@ -11,6 +12,11 @@ export class OrderListPageHarness extends ComponentHarness {
   getRows = () => this.locatorForAll(MatRowHarness)();
   async getRowValues(): Promise<IRowEntriesState[]> {
     return this.getRowEntries(getCellEntry);
+  }
+
+  async getSnackBar(): Promise<string> {
+    const snackBar = await (this.documentRootLocatorFactory().locatorFor('.mdc-snackbar'))();
+    return snackBar.text();
   }
   async getRowEntries<ENTITY>(getCellEntry: (cell: MatCellHarness) => Promise<Partial<ENTITY>>): Promise<ENTITY[]> {
     const rows = await this.getRows();

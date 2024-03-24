@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, DestroyRef, inject} from '@angular/core';
 import {IApiOrder, OrderService} from '../../api/orders';
 import {BehaviorSubject, catchError, forkJoin, map, Observable, of, switchMap} from 'rxjs';
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from '@angular/common';
@@ -6,6 +6,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {CustomerService} from '../../api/customers';
 import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 interface IUIOrder extends IApiOrder {
   customer: string;
@@ -21,12 +24,13 @@ interface IUIOrder extends IApiOrder {
     NgForOf,
     MatCardModule,
     RouterLink,
-    NgIf
+    NgIf,
+    MatButtonModule
   ]
 })
 export class OrderListComponent {
   error$ = new BehaviorSubject<string | null>(null);
-  orders$: Observable<IUIOrder[]>= inject(OrderService).getOrderList().pipe(
+  orders$: Observable<IUIOrder[]>= this.orderService.getOrderList().pipe(
       switchMap((orders) => {
         return forkJoin(orders.map(order => {
           const customerId: number = +order['customer-id'];
@@ -40,7 +44,19 @@ export class OrderListComponent {
       return of(err)
     })
   );
-  displayedColumns = ['id', 'customerId', 'items', 'total'];
-  constructor(private customerService: CustomerService) {
+  displayedColumns = ['id', 'customerId', 'items', 'total', 'actions'];
+  destroyRef = inject(DestroyRef)
+  constructor(
+    private orderService: OrderService,
+    private customerService: CustomerService,
+    private snackbar: MatSnackBar
+  ) {
+  }
+
+  submitOrder(id: string) {
+    this.orderService.submitOrder(id).pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(text => {
+        this.snackbar.open(text)
+      })
   }
 }
