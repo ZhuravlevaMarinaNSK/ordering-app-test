@@ -1,0 +1,16 @@
+<a [routerLink]="['/', MainPath.OrderListPath]">Return To Order List</a>
+<div *ngIf="error$.value">{{error$ | async}}</div>
+<section *ngIf="data$ | async as data">
+  <h2>Order ID {{data.id}}</h2>
+  <mat-card *ngFor="let item of data.items; let index = index">
+    <mat-card-title>#{{index + 1}}</mat-card-title>
+    <mat-card-content class="card-item">
+      <div aria-label="productId">Product ID: {{item['product-id']}}</div>
+      <div aria-label="quantity">Quantity: {{item.quantity}}</div>
+      <div aria-label="unitPrice">Price per unit: {{item['unit-price']}}</div>
+    </mat-card-content>
+    <mat-card-footer><div aria-label="totalPrice">Total for item: {{item.total}}</div></mat-card-footer>
+  </mat-card>
+  <b>Total: {{ data.total }}</b>
+</section>
+

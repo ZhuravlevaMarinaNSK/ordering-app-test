@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Ordering App';
+
+  isLoading$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private router: Router) {
+    this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          this.isLoading$.next(true);
+        }
+        else if (event instanceof NavigationEnd) {
+          this.isLoading$.next(false);
+        }
+      });
+  }
 }
