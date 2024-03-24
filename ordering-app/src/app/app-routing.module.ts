@@ -6,7 +6,7 @@ import {OrderListComponent} from './main/order-list/order-list.component';
 
 export enum MainPath {
   OrderListPath = 'order-list',
-  OrderDetailsPath = 'order-details',
+  ProductListPath = 'product-list',
   NoAccessPath = 'no-access',
   NotFound404 = 'not-found-404',
 }
@@ -33,6 +33,14 @@ export const routes: Routes = [
               )
           },
         ]
+      },
+      {
+        path: MainPath.ProductListPath,
+        loadComponent: () =>
+          import('./main/product-list/product-list.component').then(
+            (c) => c.ProductListComponent,
+          ),
+        pathMatch: 'full',
       },
       {
         path: MainPath.NoAccessPath,

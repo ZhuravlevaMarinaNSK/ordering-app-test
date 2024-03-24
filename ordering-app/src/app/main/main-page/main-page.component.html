@@ -2,7 +2,8 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav opened [fixedInViewport]=true>
-    <a [routerLink]="['/', MainPath.OrderListPath]">Order List</a>
+    <div><a [routerLink]="['/', MainPath.OrderListPath]">Order List</a></div>
+    <div><a [routerLink]="['/', MainPath.ProductListPath]">Product List</a></div>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
