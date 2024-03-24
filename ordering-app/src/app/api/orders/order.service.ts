@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, forkJoin, map, Observable, shareReplay} from 'rxjs';
+import {catchError, forkJoin, map, Observable, of, shareReplay} from 'rxjs';
 import {IApiOrder} from './order.model';
 import {handleError} from '../index';
 
@@ -41,5 +41,9 @@ export class OrderService {
         return +o.id === id
       })),
     );
+  }
+
+  submitOrder(id: string) {
+    return of(`The order ${id} has been placed`);
   }
 }

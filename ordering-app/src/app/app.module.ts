@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { OrderListComponent } from './main/order-list/order-list.component';
 import { NoAccessComponent } from './main/no-access/no-access.component';
 import { NotFoundComponent } from './main/not-found/not-found.component';
-import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import { MainPageComponent } from './main/main-page/main-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OrderDetailsComponent } from './main/order-details/order-details.component';
 import {RouterModule} from '@angular/router';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,10 @@ import {RouterModule} from '@angular/router';
     MainPageComponent,
     BrowserAnimationsModule,
     OrderDetailsComponent,
+    MatSnackBarModule
   ],
   providers: [
-
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 25000}}
   ],
   bootstrap: [AppComponent]
 })
