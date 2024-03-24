@@ -1,0 +1,8 @@
+.card-item {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  padding: 20px;
+}
+mat-card {
+  margin-bottom: 15px;
+}

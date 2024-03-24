@@ -4,6 +4,8 @@ import { OrderListComponent } from './order-list.component';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {OrderListPageHarness} from './order-list.harness';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {ActivatedRoute, RouterModule} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('OrderListComponent', () => {
   let fixture: ComponentFixture<OrderListComponent>;
@@ -12,8 +14,7 @@ describe('OrderListComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [OrderListComponent, HttpClientTestingModule],
-      declarations: []
+      imports: [OrderListComponent, HttpClientTestingModule, RouterTestingModule]
     });
     fixture = TestBed.createComponent(OrderListComponent);
     page = await TestbedHarnessEnvironment.harnessForFixture(fixture, OrderListPageHarness);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterModule, RouterOutlet} from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MainPath} from '../../app-routing.module';
 import {MatIconModule} from '@angular/material/icon';
@@ -13,9 +13,13 @@ import {MatIconModule} from '@angular/material/icon';
     RouterOutlet,
     MatSidenavModule,
     RouterLink,
-    MatIconModule
-  ]
+    MatIconModule,
+    ]
 })
 export class MainPageComponent {
   MainPath = MainPath;
+
+  constructor(private router: Router) {
+
+  }
 }

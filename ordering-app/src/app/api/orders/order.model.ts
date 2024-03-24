@@ -1,8 +1,12 @@
-import {IApiProduct} from '../products';
-
 export interface IApiOrder {
   id: string;
   'customer-id': string;
-  items: IApiProduct[];
+  items: IApiOrderItem[];
+  total: string;
+}
+interface IApiOrderItem {
+  'product-id': string;
+  quantity: string;
+  'unit-price': string;
   total: string;
 }

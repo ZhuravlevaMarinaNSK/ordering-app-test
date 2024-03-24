@@ -6,18 +6,33 @@ import {OrderListComponent} from './main/order-list/order-list.component';
 
 export enum MainPath {
   OrderListPath = 'order-list',
+  OrderDetailsPath = 'order-details',
   NoAccessPath = 'no-access',
   NotFound404 = 'not-found-404',
 }
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
     children: [
       {
         path: MainPath.OrderListPath,
-        loadComponent: () =>
-          import('./main/order-list/order-list.component').then((c) => c.OrderListComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./main/order-list/order-list.component').then(
+                (c) => c.OrderListComponent,
+              )
+          },
+          {
+            path: `:id`,
+            loadComponent: () =>
+              import('./main/order-details/order-details.component').then(
+                (c) => c.OrderDetailsComponent,
+              )
+          },
+        ]
       },
       {
         path: MainPath.NoAccessPath,
@@ -35,7 +50,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        component: OrderListComponent
+        component: NotFoundComponent
       }
     ]
   }
