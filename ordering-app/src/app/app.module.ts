@@ -12,13 +12,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OrderDetailsComponent } from './main/order-details/order-details.component';
 import {RouterModule} from '@angular/router';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import {OrderItemComponent} from './main/order-item/order-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes, {enableTracing: true}),
+    RouterModule.forRoot(routes),
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +29,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
     MainPageComponent,
     BrowserAnimationsModule,
     OrderDetailsComponent,
-    MatSnackBarModule
+    MatSnackBarModule,
+    OrderItemComponent
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 25000}}

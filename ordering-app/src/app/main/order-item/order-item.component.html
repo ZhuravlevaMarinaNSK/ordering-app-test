@@ -1,0 +1,10 @@
+<mat-card *ngIf="product">
+  <mat-card-title>#{{(count || 0) + 1}} <button (click)="delete()" mat-button>delete</button></mat-card-title>
+  <mat-card-content class="card-item">
+    <div aria-label="productId">Product ID: {{product['product-id']}}</div>
+    <div aria-label="quantity">Quantity: <input matInput type="number" min="0"
+      [(ngModel)]="product.quantity" (ngModelChange)="modelChanged($event)"></div>
+    <div aria-label="unitPrice">Price per unit: {{product['unit-price']}}</div>
+  </mat-card-content>
+  <mat-card-footer><div aria-label="totalPrice">Total for item: {{product.total}}</div></mat-card-footer>
+</mat-card>

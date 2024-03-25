@@ -2,15 +2,12 @@
 <div *ngIf="error$.value">{{error$ | async}}</div>
 <section *ngIf="data$ | async as data">
   <h2>Order ID {{data.id}}</h2>
-  <mat-card *ngFor="let item of data.items; let index = index">
-    <mat-card-title>#{{index + 1}}</mat-card-title>
-    <mat-card-content class="card-item">
-      <div aria-label="productId">Product ID: {{item['product-id']}}</div>
-      <div aria-label="quantity">Quantity: {{item.quantity}}</div>
-      <div aria-label="unitPrice">Price per unit: {{item['unit-price']}}</div>
-    </mat-card-content>
-    <mat-card-footer><div aria-label="totalPrice">Total for item: {{item.total}}</div></mat-card-footer>
-  </mat-card>
-  <b>Total: {{ data.total }}</b>
+  <app-order-item
+    [product]="item" [count]="index"
+    (productModified)="modified$.next($event)"
+    (productDeleted)="deleteItem($event, data)"
+              *ngFor="let item of data.items; let index = index; trackBy: trackByFn"></app-order-item>
+  <b>Total: {{data.total}}</b>
+  <button (click)="submitChanges(data)">Submit Changes</button>
 </section>
 
