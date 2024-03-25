@@ -44,7 +44,7 @@ async function getCellEntry(cell: MatCellHarness): Promise<Partial<IRowEntriesSt
       return {total: await cell.getText()};
     case 'actions':
       return {
-        actions: await cell.getText()
+        actions: (await cell.getText()).split('!')
       };
     default:
       throw new Error(`Unexpected column "${columnName}"`);
@@ -56,5 +56,5 @@ export interface IRowEntriesState {
   customer?: string;
   items?: string[];
   total?: string;
-  actions?: string;
+  actions?: string[];
 }

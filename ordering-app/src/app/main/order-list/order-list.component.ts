@@ -55,8 +55,16 @@ export class OrderListComponent {
 
   submitOrder(id: string) {
     this.orderService.submitOrder(id).pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (text) => this.snackbar.open(text as unknown as string),
+        err => this.snackbar.open(err)
+      )
+  }
+
+  deleteOrder(id: string) {
+    this.orderService.deleteOrder(id).pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(text => {
-        this.snackbar.open(text)
+        this.snackbar.open(`Order ${id} has been successfully deleted`)
       })
   }
 }

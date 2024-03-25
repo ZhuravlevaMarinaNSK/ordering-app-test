@@ -24,7 +24,38 @@
     <td mat-cell *matCellDef="let element"> {{element.price}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="addToOrder(element)">Add Product</button>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
 <ng-template #error><div>{{error$ | async}}</div></ng-template>
+<ng-template #dialogTemplate>
+  <mat-dialog-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Order</mat-label>
+        <input type="text"
+               placeholder="Pick order"
+               aria-label="Order ID"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+            {{option.id}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>No Thanks</button>
+    <button mat-button [mat-dialog-close]="myControl.value" [disabled]="!myControl.value" cdkFocusInitial>Add to selected Order</button>
+  </mat-dialog-actions>
+</ng-template>
