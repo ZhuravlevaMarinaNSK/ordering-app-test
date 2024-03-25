@@ -95,21 +95,21 @@ describe('OrderListComponent', () => {
         id: '13',
         items: ['Product ID: Product ID 1', 'Quantity: 100', 'Unit price: 1', 'Total price: 100'],
         total: '100',
-        actions: 'Submit order'
+        actions: ['Submit order', 'Delete order']
       },
       {
         customer: 'He Who Must Not Be Named',
         id: '99',
         items: ['Product ID: Product ID 2', 'Quantity: 100', 'Unit price: 2', 'Total price: 200'],
         total: '200',
-        actions: 'Submit order'
+        actions: ['Submit order', 'Delete order']
       },
       {
         customer: 'Lucky Billy',
         id: '35445',
         items: ['Product ID: Product ID 3', 'Quantity: 5', 'Unit price: 5', 'Total price: 25'],
         total: '25',
-        actions: 'Submit order'
+        actions: ['Submit order', 'Delete order']
       }
     ]);
 
@@ -117,8 +117,8 @@ describe('OrderListComponent', () => {
 
   it('should submit order', async () => {
     const [row1, ...rows] = await page.getRows();
-    const [actionCell, ...cells] = await row1.getCells({text: 'Submit order'});
-    await (await actionCell.getHarness(MatButtonHarness)).click();
+    const [actionCell, ...cells] = await row1.getCells({columnName: 'actions'});
+    await (await actionCell.getHarness(MatButtonHarness.with({selector: '[aria-label="submit-order"]'}))).click();
     expect(await page.getSnackBar()).toEqual('The order 13 has been placed');
   });
 });

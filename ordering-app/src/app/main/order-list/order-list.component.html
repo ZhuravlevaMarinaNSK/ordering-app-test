@@ -34,7 +34,8 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button (click)="submitOrder(element.id)">Submit order</button>
+      <button aria-label="submit-order" mat-button (click)="submitOrder(element.id)">Submit order!</button>
+      <button mat-button (click)="deleteOrder(element.id)">Delete order</button>
     </td>
   </ng-container>
 

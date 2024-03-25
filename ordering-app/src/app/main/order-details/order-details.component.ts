@@ -71,6 +71,7 @@ export class OrderDetailsComponent {
     this.orderService.updateOrder(data?.id, result)
       .subscribe((res) => {
       this.snackbar.open(`Order ${data?.id} updated!`);
+      void this.router.navigate([MainPath.OrderListPath]);
     });
   }
 

@@ -5,6 +5,8 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {OrderDetailsPageHarness} from './order-details.harness';
 import {ActivatedRoute} from '@angular/router';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('OrderDetailsComponent', () => {
   let fixture: ComponentFixture<OrderDetailsComponent>;
@@ -13,7 +15,7 @@ describe('OrderDetailsComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [OrderDetailsComponent, HttpClientTestingModule],
+      imports: [OrderDetailsComponent, HttpClientTestingModule, MatSnackBarModule, NoopAnimationsModule],
       providers: [
         {provide: ActivatedRoute, useValue: {snapshot: {params: {id: '99'}}}},
       ]
@@ -71,7 +73,7 @@ describe('OrderDetailsComponent', () => {
       total: 'Total: 200',
       cards: [
         {
-          position: '#1',
+          position: '#1 delete',
           price: 'Price per unit: 2',
           productId: 'Product ID: Product ID 2',
           total: 'Total for item: 200',

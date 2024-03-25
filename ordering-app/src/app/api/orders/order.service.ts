@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpRequest} from '@angular/common/http';
 import {
   BehaviorSubject,
   catchError,
@@ -8,7 +8,7 @@ import {
   map,
   Observable,
   of,
-  shareReplay,
+  shareReplay, throwError,
 } from 'rxjs';
 import {IApiOrder} from './order.model';
 import {handleError} from '../index';
@@ -67,8 +67,13 @@ export class OrderService {
     );
   }
 
-  submitOrder(id: string) {
-    return of(`The order ${id} has been placed`);
+  submitOrder(id: string): Observable<string | Error> {
+    const randomBool = Math.random() >= 0.5;
+    if (randomBool) {
+      return of(`The order ${id} has been placed`);
+    } else {
+      return throwError(new Error('Some error occurred. Please try again')).pipe(catchError(handleError));
+    }
   }
 
   updateOrder(id: string, data: IApiOrder) {

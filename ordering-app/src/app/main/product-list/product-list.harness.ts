@@ -36,6 +36,10 @@ async function getCellEntry(cell: MatCellHarness): Promise<Partial<IRowEntriesSt
       return {category: await cell.getText()};
     case 'price':
       return {price: await cell.getText()};
+    case 'actions':
+      return {
+        actions: await cell.getText()
+      };
     default:
       throw new Error(`Unexpected column "${columnName}"`);
   }
@@ -46,4 +50,5 @@ export interface IRowEntriesState {
   description?: string;
   category?: string;
   price?: string;
+  actions?: string;
 }
